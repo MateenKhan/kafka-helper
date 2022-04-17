@@ -25,7 +25,7 @@
 
 
 ### Technologies used: 
-1. Spring boot and kakfa for backend
+1. Spring boot and apache kakfa client for backend
 2. Bootstrap 4 for the ui
 
 
