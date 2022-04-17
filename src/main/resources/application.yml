@@ -1,0 +1,55 @@
+kafka:
+  consumer:
+    configMap:
+      "[bootstrap.servers]": ${kafka.bootstrap_servers}
+      "[group.id]":
+      "[auto.offset.reset]": latest
+      "[retry.backoff.ms]": 30
+      "[key.deserializer]": org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      "[value.deserializer]": org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      "[spring.deserializer.key.delegate.class]": org.apache.kafka.common.serialization.StringDeserializer
+      "[spring.deserializer.value.delegate.class]": org.apache.kafka.common.serialization.StringDeserializer
+      "[ssl.truststore.location]": ${kafka.ssl_truststore_location}
+      "[ssl.truststore.password]": ${kafka.ssl_truststore_password}
+      "[ssl.keystore.location]": ${kafka.ssl_keystore_location}
+      "[ssl.keystore.password]": ${kafka.ssl_keystore_password}
+      "[ssl.key.password]":
+      "[security.protocol]": ${kafka.security_protocol}
+      "[ssl.endpoint.identification.algorithm]": ""
+      "[enable.auto.commit]": false
+    success-log: "Message consumed from : partition : {}, offset:{}, topic:{}, message:{}"
+    failure-log: "Error from while consuming from kafka : {}"
+    input-log: "Message Consumed from : partition : {}, offset:{}, topic:{}, message:{}"
+    pretty-print-log: "*************************************************"
+    pretty-print: true
+    logging-enabled: true
+  producer:
+    configMap:
+      "[bootstrap.servers]": ${kafka.bootstrap_servers}
+      "[key.serializer]": org.apache.kafka.common.serialization.StringSerializer
+      "[value.serializer]": org.apache.kafka.common.serialization.StringSerializer
+      "[acks]": all
+      "[client.id]":
+      "[ssl.truststore.location]": ${kafka.ssl_truststore_location}
+      "[ssl.truststore.password]": ${kafka.ssl_truststore_password}
+      "[ssl.keystore.location]": ${kafka.ssl_producer_keystore_location}
+      "[ssl.keystore.password]": ${kafka.ssl_keystore_password}
+      "[ssl.key.password]": rH3CUSliJAiL
+      "[security.protocol]": ${kafka.security_protocol}
+      "[ssl.endpoint.identification.algorithm]": ""
+    success-log: "Message Published to : partition : {}, offset:{}, topic:{}, message:{}"
+    failure-log: "Error from while publishing to kafka : {}"
+    input-log: "Starting to produce value to - topic :: {} message :: {}"
+    pretty-print-log: "*************************************************"
+    pretty-print: true
+    logging-enabled: true
+    topic: test-2
+  bootstrap_servers: your server url here
+  config_location: @project.basedir@
+  ssl_truststore_location:
+  ssl_keystore_location:
+  ssl_producer_keystore_location:
+  ssl_truststore_password:
+  ssl_keystore_password:
+  security_protocol:
+
