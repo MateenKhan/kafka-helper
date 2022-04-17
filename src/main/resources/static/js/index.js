@@ -1,19 +1,4 @@
 let baseUrl = "http://localhost:8080"
-let partitionsHtml = '<div class="bg-dark p-2 partition-container">'+
-                            '<span class="text-white">partition-0</span>'+
-                            '<i class="bi bi-play-circle-fill text-primary float-right"></i>'+
-                        '</div>';
-
-let topicDiv = '<div id="topic-partition-container-1">' +
-                    '<a class="pl-0 nav-link active h4" data-target="#partitions" data-toggle="collapse" href="#" id="topic-label"></a>' +
-                    '<div class="collapse" id="partitions">' +
-                        '<div class="bg-dark p-2 partition-container">' +
-                            '<span class="text-white">partition-0</span>' +
-                            '<i class="bi bi-play-circle-fill text-primary float-right"></i>' +
-                        '</div>'+
-                    '</div>' +
-                '</div>';
-
 $(document).ready(function () {
 
     getTopics();
@@ -32,6 +17,7 @@ $(document).ready(function () {
 function getPartitions(ths){
     $("#spinner").show(500);
     let partitionsDiv = $(ths);
+    partitionsDiv.find(".partition-container").hide();
     let topic = partitionsDiv.parent().find("a").attr("id");
     $.ajax({
         method: "GET", url: baseUrl + "/topics/"+topic+"/partitions/"
@@ -46,11 +32,6 @@ function getPartitions(ths){
     });
 
 }
-
-// '<div class="bg-dark p-2 partition-container">'+
-// '<span class="text-white">partition-0</span>'+
-// '<i class="bi bi-play-circle-fill text-primary float-right"></i>'+
-// '</div>';
 
 function updatePartitionsHTML(data,partitionsDiv,topic){
     if(data){
