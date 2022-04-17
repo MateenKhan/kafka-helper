@@ -6,6 +6,7 @@ $(document).ready(function () {
 });
 
 function getPartitions() {
+    $("#spinner").show(200)
     $.ajax({
         method: "GET", url: baseUrl + "/topics/partitions"
     }).done(function (data) {
@@ -14,6 +15,7 @@ function getPartitions() {
         console.log("error", e);
     }).always(function (data) {
         console.log("complete");
+        $("#spinner").hide(200);
     });
 }
 
